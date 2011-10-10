@@ -1,0 +1,39 @@
+# vim:filetype=sh
+
+# Clojure Fun
+alias ng='java -server -cp src:classes:lib/*'
+
+# Bookmarks
+alias cdaro='cd ~/Documents/Workspace/tweetaroo; l'
+alias cdwho='cd ~/Documents/Workspace/whotouse.co/whotouse; l'
+
+alias grep='grep --color=auto'
+
+alias c='clear'
+alias cl='clear; l'
+
+alias ..='cd ..'
+
+function cdc
+{
+  cd $1
+  ls ;
+}
+
+alias h='history'
+alias l='ls -lhGtra'
+
+# Git
+alias ga='git add'
+alias gp='git push'
+alias gl='git log'
+alias gs='git status'
+alias gd='git diff'
+alias gm='git commit -m'
+alias gma='git commit -am'
+alias gb='git branch'
+alias gc='git checkout'
+alias gra='git remote add'
+alias grr='git remote rm'
+alias gpu='git pull'
+alias gcl='git clone'
