@@ -20,12 +20,6 @@ map <C-V> "+gP
 cmap <C-V> <C-R>+
 vnoremap <C-C> "+y
 
-" Use ctrl + movement keys to move around windows
-map <C-H> <C-W>h
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-map <C-L> <C-W>l
-
 " Remove gui options
 set guioptions-=L
 set guioptions-=l
@@ -33,17 +27,19 @@ set guioptions-=R
 set guioptions-=r
 set guioptions-=m
 
-" Command-T for CommandT
-map <Leader>f :CommandT<CR>
-imap <Leader>f <Esc>:CommandT<CR>
-
 " Command-][ to increase/decrease indentation
 "vmap <m-]> >gv
 "vmap <m-[> <gv
 
 " Set font
-"set guifont=Inconsolata\ 12
-set guifont=Monaco:h12
+if has("gui_macvim")
+  set guifont=Monaco:h12
+else
+  set guifont=Monaco\ 10
+endif
+
+" No visual bell
+set visualbell t_vb=
 
 " Auto refresh google chrome on save
 "autocmd BufWriteCmd *.html,*.css,*.erb,*.less,*.js,*.scss,*.coffee :call Refresh_browser()
@@ -54,17 +50,3 @@ set guifont=Monaco:h12
 "" silent !osascript ~/bin/refresh.scpt
 "endif
 "endfunction
-
-autocmd BufRead,BufNewFile *.erb set filetype=eruby.html5
-autocmd BufRead,BufNewFile *.hbs set filetype=mustache
-
-" Clojure Section
-let vimclojure#WantNailgun = 1
-let vimclojure#SplitPos = "bottom"
-let vimclojure#SplitSize = 10
-
-autocmd BufRead,BufNewFile *.clj nmap <C-c><C-c> <Plug>ClojureEvalFile
-autocmd BufRead,BufNewFile *.clj nmap <C-x><C-x> <Plug>ClojureRunTests
-
-" Ctags tags
-set tags=tags;/

@@ -3,10 +3,6 @@
 # Clojure Fun
 alias ng='java -server -cp src:classes:lib/*'
 
-# Bookmarks
-alias cdaro='cd ~/Documents/Workspace/tweetaroo; l'
-alias cdwho='cd ~/Documents/Workspace/whotouse.co/whotouse; l'
-
 alias grep='grep --color=auto'
 
 alias c='clear'

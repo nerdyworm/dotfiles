@@ -1,4 +1,9 @@
 # vim:filetype=sh
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
 
 # Colors from http://wiki.archlinux.org/index.php/Color_Bash_Prompt
 # misc
@@ -67,3 +72,4 @@ grb_git_prompt() {
 }
 
 PS1="\h:\W\$(grb_git_prompt) "
+#PS1='[\W$(__git_ps1 " (%s)")]\$ '

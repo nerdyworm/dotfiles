@@ -24,3 +24,22 @@ map <C-H> <C-W>h
 map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
+
+" Command-T for CommandT
+map <Leader>f :CommandT<CR>
+imap <Leader>f <Esc>:CommandT<CR>
+
+" Files Types
+autocmd BufRead,BufNewFile *.erb set filetype=eruby.html5
+autocmd BufRead,BufNewFile *.hbs set filetype=mustache
+
+" Clojure Section
+let vimclojure#WantNailgun = 1
+let vimclojure#SplitPos = "bottom"
+let vimclojure#SplitSize = 10
+
+autocmd BufRead,BufNewFile *.clj nmap <C-c><C-c> <Plug>ClojureEvalFile
+autocmd BufRead,BufNewFile *.clj nmap <C-x><C-x> <Plug>ClojureRunTests
+
+" Ctags tags
+set tags=tags;/
