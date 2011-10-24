@@ -16,8 +16,13 @@ set winheight=999
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
+" Dark backgrounds are the roxors or something
+set background=dark
 " Pretty Colors
-color jellybeans
+" color grb256
+" color jellybeans
+" color moria
+colorscheme solarized
 
 " Use ctrl + movement keys to move around windows
 map <C-H> <C-W>h

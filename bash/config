@@ -71,5 +71,5 @@ grb_git_prompt() {
   fi
 }
 
-PS1="\h:\W\$(grb_git_prompt) "
-#PS1='[\W$(__git_ps1 " (%s)")]\$ '
+#PS1="\h:\W\$(grb_git_prompt) "
+PS1='\h:\W$(__git_ps1 " (%s)") '

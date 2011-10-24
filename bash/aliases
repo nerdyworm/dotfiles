@@ -1,5 +1,7 @@
 # vim:filetype=sh
 
+alias sr='screen -r'
+
 # Clojure Fun
 alias ng='java -server -cp src:classes:lib/*'
 
