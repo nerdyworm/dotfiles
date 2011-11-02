@@ -21,8 +21,8 @@ set background=dark
 " Pretty Colors
 " color grb256
 " color jellybeans
-" color moria
-colorscheme solarized
+color moria
+" colorscheme solarized
 
 " Use ctrl + movement keys to move around windows
 map <C-H> <C-W>h
@@ -33,6 +33,9 @@ map <C-L> <C-W>l
 " Command-T for CommandT
 map <Leader>f :CommandT<CR>
 imap <Leader>f <Esc>:CommandT<CR>
+
+" Flush Command-T
+map <Leader>F :CommandTFlush<cr>
 
 " Files Types
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html5
