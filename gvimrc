@@ -1,8 +1,11 @@
 " colorscheme
+set background=dark
+
 " color jellybeans
 color moria
 " color lucius
 " color solarized
+" color xoria256
 
 " set size of window
 au GUIEnter * set lines=48 columns=120
@@ -21,11 +24,11 @@ cmap <C-V> <C-R>+
 vnoremap <C-C> "+y
 
 " Remove gui options
-set guioptions-=L
-set guioptions-=l
-set guioptions-=R
-set guioptions-=r
-set guioptions-=m
+set guioptions=
+"set guioptions-=l
+"set guioptions-=R
+"set guioptions-=r
+"set guioptions-=m
 
 " Command-][ to increase/decrease indentation
 "vmap <m-]> >gv

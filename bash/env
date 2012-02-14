@@ -4,6 +4,7 @@ export EDITOR="vim"
 # Path
 export PATH=/usr/local/bin:~/bin/:$PATH
 export PATH=$PATH:/usr/local/node/bin
+export PATH=$PATH:/usr/local/lib/node_modules
 
 # Rvm Goodness
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]  ; then
