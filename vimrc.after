@@ -5,9 +5,8 @@ set background=dark
 " color moria
 " colorscheme solarized
 " color anotherdark
-" color grb256
-"color zellner
-color xoria256
+color zellner
+" color xoria256
 
 " Use ctrl + movement keys to move around windows
 map <C-H> <C-W>h
@@ -23,17 +22,15 @@ map <C-L> <C-W>l
 "map <Leader>F :CommandTFlush<cr>
 
 " CtrlP Fuzzy File Finder
-map <Leader>f :CtrlP<cr>
-imap <Leader>f <Esc>:CtrlP<cr>
+map ,f :CtrlP<cr>
+map ,F :ClearCtrlPCache<cr>
 
-map <Leader>F :ClearCtrlPCache<cr>
+"let g:ctrlp_working_path_mode = 1
 
 
-" JANUS: format the entire file
-" fk this noise
-" nmap <leader>fef ggVG=
-"noremap <leader>fef
+" JANUS:  OMG NO BINDING THINGS TO FIND THINGY! :(
 nunmap <leader>fef
+nunmap <leader>fc
 
 " Files Types
 "autocmd BufRead,BufNewFile *.erb set filetype=eruby.html5
@@ -50,12 +47,6 @@ autocmd BufRead,BufNewFile *.clj nmap <C-x><C-x> <Plug>ClojureRunTests
 
 " Ctags tags
 set tags=tags;/
-
-" Adjust viewports to the same size
-"map <Leader>= <C-w>=
-"imap <Leader>= <Esc> <C-w>=
-
-"map <Leader>n :NERDTreeToggle<cr>:vertical resize 31<cr>
 
 augroup AuNERDTreeCmd
 autocmd AuNERDTreeCmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
@@ -84,3 +75,9 @@ endfunction
 
 " Don't underline links in html
 highlight link htmlLink text
+
+" Map ,t to script/test things
+map ,t :w\|!script/test %<cr>
+
+" Map ,w to script/wip
+map ,w :w\|!script/wip<cr>
