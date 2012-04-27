@@ -11,6 +11,10 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]  ; then
   source "$HOME/.rvm/scripts/rvm" ;
 fi
 
+if [[ -s "$HOME/.env-variables" ]]  ; then
+  source "$HOME/.env-variables" ;
+fi
+
 command_exists () {
     type "$1" &> /dev/null ;
 }

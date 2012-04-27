@@ -3,10 +3,12 @@ set background=dark
 " Pretty Colors
 " color jellybeans
 " color moria
-" colorscheme solarized
 " color anotherdark
-color zellner
-" color xoria256
+" color zellner
+color xoria256
+
+"set background=light
+"colorscheme solarized
 
 " Use ctrl + movement keys to move around windows
 map <C-H> <C-W>h
@@ -25,12 +27,16 @@ map <C-L> <C-W>l
 map ,f :CtrlP<cr>
 map ,F :ClearCtrlPCache<cr>
 
+" Find all the things
+map ,k :Ack 
+
 "let g:ctrlp_working_path_mode = 1
 
 
 " JANUS:  OMG NO BINDING THINGS TO FIND THINGY! :(
 nunmap <leader>fef
 nunmap <leader>fc
+nunmap <leader>tw
 
 " Files Types
 "autocmd BufRead,BufNewFile *.erb set filetype=eruby.html5
@@ -38,12 +44,18 @@ nunmap <leader>fc
 autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
 
 " Clojure Section
-let vimclojure#WantNailgun = 1
-let vimclojure#SplitPos = "bottom"
-let vimclojure#SplitSize = 10
+"let vimclojure#WantNailgun = 1
+"let vimclojure#SplitPos = "bottom"
+"let vimclojure#SplitSize = 10
+"let g:vimclojure#ParenRainbow = 1
 
-autocmd BufRead,BufNewFile *.clj nmap <C-c><C-c> <Plug>ClojureEvalFile
-autocmd BufRead,BufNewFile *.clj nmap <C-x><C-x> <Plug>ClojureRunTests
+"autocmd BufRead,BufNewFile *.clj nmap <C-c><C-c> <Plug>ClojureEvalFile
+"autocmd BufRead,BufNewFile *.clj nmap <C-x><C-x> <Plug>ClojureRunTests
+"au BufNewFile,BufRead *.cljs setf clojure
+"
+" Slimv
+let g:slimv_swank_cmd = '! xterm -e lein swank &'
+let g:paredit_mode = 0
 
 " Ctags tags
 set tags=tags;/
@@ -62,22 +74,11 @@ function s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 
-function s:FkingSize(...)
-  "if exists("t:NERDTreeBufName")
-    "let crr = bufnr('%')
-    "let nr = bufwinnr(t:NERDTreeBufName)
-    "echo crr.' == '. nr
-    "if crr != nr
-      "exec 'vertical' . nr . 'res 31'
-    "endif
-  "endif
-endfunction
-
 " Don't underline links in html
 highlight link htmlLink text
 
 " Map ,t to script/test things
-map ,t :w\|!script/test %<cr>
+" map ,t :w\|!script/test %<cr>
 
 " Map ,w to script/wip
 map ,w :w\|!script/wip<cr>
@@ -89,7 +90,7 @@ map <Leader>RT :!ctags --extra=+f --exclude=.git --exclude=log -R * `bundle show
 " coffeetags --vim-conf >> <PATH TO YOUR VIMRC>
 " if you want your tags to include vars/objects do:
 " coffeetags --vim-conf --include-vars
- let g:tagbar_type_coffee = {
+let g:tagbar_type_coffee = {
   \ 'kinds' : [
   \   'f:functions',
   \   'o:object'
@@ -102,3 +103,70 @@ map <Leader>RT :!ctags --extra=+f --exclude=.git --exclude=log -R * `bundle show
   \ 'ctagsbin' : 'coffeetags',
   \ 'ctagsargs' : '--include-vars ',
   \}
+
+
+" Close all buffers cept the current one
+source ~/.janus/bufonly.vim
+map ,BB :BufOnly<cr>
+
+:nnoremap <CR> :nohlsearch<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>t :call RunTestFile()<cr>
+map <leader>T :call RunNearestTest()<cr>
+map <leader>a :call RunTests('')<cr>
+map <leader>c :w\|:!script/features<cr>
+map <leader>w :w\|:!script/features --profile wip<cr>
+
+function! RunTestFile(...)
+    if a:0
+        let command_suffix = a:1
+    else
+        let command_suffix = ""
+    endif
+
+    " Run the tests for the previously-marked file.
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    if in_test_file
+        call SetTestFile()
+    elseif !exists("t:grb_test_file")
+        return
+    end
+    call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+function! RunNearestTest()
+    let spec_line_number = line('.')
+    call RunTestFile(":" . spec_line_number . " -b")
+endfunction
+
+function! SetTestFile()
+    " Set the spec file that tests will be run for.
+    let t:grb_test_file=@%
+endfunction
+
+function! RunTests(filename)
+    " Write the file and run tests for the given filename
+    :w
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    if match(a:filename, '\.feature$') != -1
+        exec ":!script/features " . a:filename
+    else
+        if filereadable("script/test")
+            exec ":!script/test " . a:filename
+        elseif filereadable("Gemfile")
+            exec ":!bundle exec rspec --color " . a:filename
+        else
+            exec ":!rspec --color " . a:filename
+        end
+    end
+endfunction
+
