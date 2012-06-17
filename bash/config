@@ -73,4 +73,3 @@ grb_git_prompt() {
 
 #PS1="\h:\W\$(grb_git_prompt) "
 PS1='\h:\W$(__git_ps1 " (%s)") '
-PS1="\[\033[G\]$PS1"
