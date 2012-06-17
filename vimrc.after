@@ -103,10 +103,6 @@ let g:tagbar_type_coffee = {
   \}
 
 
-" Close all buffers cept the current one
-source ~/.janus/bufonly.vim
-map ,BB :BufOnly<cr>
-
 :nnoremap <CR> :nohlsearch<cr>
 
 
