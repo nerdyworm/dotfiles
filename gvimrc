@@ -23,6 +23,10 @@ map <C-V> "+gP
 cmap <C-V> <C-R>+
 vnoremap <C-C> "+y
 
+map <leader>t :call RunRubyCurrentFileConque()<cr>
+map <leader>t :call RunRspecCurrentLineConque()<cr>
+map <leader>a :call RunSingleConque("./script/test")<cr>
+
 " Remove gui options
 set guioptions=
 "set guioptions-=l
@@ -36,7 +40,7 @@ set guioptions=
 
 " Set font
 if has("gui_macvim")
-  set guifont=Monaco:h12
+  set guifont=Monaco:h14
 else
   set guifont=Monaco\ 10
 endif

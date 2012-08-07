@@ -1,8 +1,8 @@
 " Dark backgrounds are the roxors or something
 set background=dark
 " Pretty Colors
-color jellybeans
-" color xoria256
+" color jellybeans
+color xoria256
 " color Tomorrow-Night-Eighties
 
 "set background=light
