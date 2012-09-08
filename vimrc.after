@@ -1,9 +1,5 @@
-" Dark backgrounds are the roxors or something
 set background=dark
-" Pretty Colors
-" color jellybeans
-color xoria256
-" color Tomorrow-Night-Eighties
+color jellybeans
 
 "set background=light
 "colorscheme solarized
@@ -14,24 +10,14 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
 
-" Command-T for CommandT
-"map <Leader>f :CommandT<CR>
-"imap <Leader>f <Esc>:CommandT<CR>
-
-"" Flush Command-T
-"map <Leader>F :CommandTFlush<cr>
-
 " CtrlP Fuzzy File Finder
 map ,f :CtrlP<cr>
 map ,F :ClearCtrlPCache<cr>
 
 " Find all the things
-map ,k :Ack 
+map ,k :Ack
 
-"let g:ctrlp_working_path_mode = 1
-
-
-" JANUS:  OMG NO BINDING THINGS TO FIND THINGY! :(
+"JANUS:  OMG NO BINDING THINGS TO FIND THINGY! :(
 nunmap <leader>fef
 nunmap <leader>fc
 nunmap <leader>tw
