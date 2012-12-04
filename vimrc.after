@@ -26,6 +26,7 @@ nunmap <leader>tw
 "autocmd BufRead,BufNewFile *.erb set filetype=eruby.html5
 "autocmd BufRead,BufNewFile *.hbs set filetype=mustache
 autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
+autocmd BufRead,BufNewFile Assetfile set filetype=ruby
 
 " Clojure Section
 "let vimclojure#WantNailgun = 1
