@@ -33,6 +33,7 @@ plugins=(git)
 
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.env
 
 # Customize to your needs...
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/share/npm/bin/

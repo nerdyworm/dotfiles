@@ -29,14 +29,14 @@ autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
 autocmd BufRead,BufNewFile Assetfile set filetype=ruby
 
 " Clojure Section
-"let vimclojure#WantNailgun = 1
-"let vimclojure#SplitPos = "bottom"
-"let vimclojure#SplitSize = 10
-"let g:vimclojure#ParenRainbow = 1
+let vimclojure#WantNailgun = 1
+let vimclojure#SplitPos = "bottom"
+let vimclojure#SplitSize = 10
+let g:vimclojure#ParenRainbow = 1
+autocmd BufRead,BufNewFile *.clj nmap <C-c><C-c> <Plug>ClojureEvalFile
+autocmd BufRead,BufNewFile *.clj nmap <C-x><C-x> <Plug>ClojureRunTests
+au BufNewFile,BufRead *.cljs setf clojure
 
-"autocmd BufRead,BufNewFile *.clj nmap <C-c><C-c> <Plug>ClojureEvalFile
-"autocmd BufRead,BufNewFile *.clj nmap <C-x><C-x> <Plug>ClojureRunTests
-"au BufNewFile,BufRead *.cljs setf clojure
 "
 " Slimv
 let g:slimv_swank_cmd = '! xterm -e lein swank &'
@@ -110,7 +110,7 @@ function! RunTestFile(...)
     endif
 
     " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_spec.coffee\)$') != -1
     if in_test_file
         call SetTestFile()
     elseif !exists("t:grb_test_file")
@@ -140,6 +140,8 @@ function! RunTests(filename)
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
     if match(a:filename, '\.feature$') != -1
         exec ":!script/features " . a:filename
+    elseif match(a:filename, '\.coffee$') != -1
+        exec ":!script/test_js " . a:filename
     else
         if filereadable("script/test")
             exec ":!script/test " . a:filename
