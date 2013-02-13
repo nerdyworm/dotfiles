@@ -19,13 +19,13 @@ set nowrap
 "inoremap <C-S> <C-O>:update<CR>
 
 " Ctrl-V paste, Ctrl-C copy
-map <C-V> "+gP
-cmap <C-V> <C-R>+
-vnoremap <C-C> "+y
+"map <C-V> "+gP
+"cmap <C-V> <C-R>+
+"vnoremap <C-C> "+y
 
-map <leader>t :call RunRubyCurrentFileConque()<cr>
-map <leader>t :call RunRspecCurrentLineConque()<cr>
-map <leader>a :call RunSingleConque("./script/test")<cr>
+"map <leader>t :call RunRubyCurrentFileConque()<cr>
+"map <leader>t :call RunRspecCurrentLineConque()<cr>
+"map <leader>a :call RunSingleConque("./script/test")<cr>
 
 " Remove gui options
 set guioptions=

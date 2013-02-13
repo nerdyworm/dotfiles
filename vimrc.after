@@ -15,7 +15,7 @@ map ,f :CtrlP<cr>
 map ,F :ClearCtrlPCache<cr>
 
 " Find all the things
-map ,k :Ack
+map ,k :Ack 
 
 "JANUS:  OMG NO BINDING THINGS TO FIND THINGY! :(
 nunmap <leader>fef
@@ -27,6 +27,9 @@ nunmap <leader>tw
 "autocmd BufRead,BufNewFile *.hbs set filetype=mustache
 autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
 autocmd BufRead,BufNewFile Assetfile set filetype=ruby
+
+" Go Tabs
+autocmd Filetype go setlocal ts=4 sw=4 sts=0 noexpandtab
 
 " Clojure Section
 let vimclojure#WantNailgun = 1

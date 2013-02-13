@@ -23,27 +23,10 @@ let g:NERDTreeWinSize = 31
 set t_Co=256
 
 " Janus Disable Plugins Section
-"call janus#disable_plugin('git')
-"call janus#disable_plugin('fugitive')
-call janus#disable_plugin('indent_object')
-call janus#disable_plugin('surround')
-call janus#disable_plugin('align')
-call janus#disable_plugin('searchfold')
-call janus#disable_plugin('puppet')
-call janus#disable_plugin('arduino')
-
-
-" Hammer crashes Vim for me
-call janus#disable_plugin('hammer')
-"call janus#disable_plugin('nrrwrgn')
-call janus#disable_plugin('gundo')
 call janus#disable_plugin('css-color')
-"call janus#disable_plugin('endwise', "?end wise...")
-call janus#disable_plugin('indent-object')
-call janus#disable_plugin('kwbd')
+call janus#disable_plugin('eunuch')
 call janus#disable_plugin('matchit')
 call janus#disable_plugin('narrowregion')
-call janus#disable_plugin('pep8')
-call janus#disable_plugin('snipmate')
-call janus#disable_plugin('tlib')
 call janus#disable_plugin('vimwiki')
+call janus#disable_plugin('zoomwin')
+call janus#disable_plugin('vroom')
