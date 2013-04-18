@@ -4,6 +4,10 @@ color jellybeans
 "set background=light
 "colorscheme solarized
 
+" Always split the window below and to the right
+set splitbelow
+set splitright
+
 " Use ctrl + movement keys to move around windows
 map <C-H> <C-W>h
 map <C-J> <C-W>j
