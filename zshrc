@@ -37,7 +37,7 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.env
 
 # Customize to your needs...
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/heroku/bin/:/usr/local/share/npm/bin/:~/bin
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/heroku/bin/:/usr/local/share/npm/bin/:~/bin
 
 # No auto correct
 unsetopt correct_all
@@ -50,3 +50,5 @@ export EDITOR=vim
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+export GOPATH=~/gopath/
+export PATH=${GOPATH//://bin:}/bin:$PATH

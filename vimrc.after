@@ -1,5 +1,7 @@
 set background=dark
 color jellybeans
+"color lettuce+
+"color xoria256
 
 "set background=light
 "colorscheme solarized
@@ -21,6 +23,9 @@ map ,F :ClearCtrlPCache<cr>
 " Find all the things
 map ,k :Ack 
 
+" Disable K
+map K <Nop>
+
 "JANUS:  OMG NO BINDING THINGS TO FIND THINGY! :(
 nunmap <leader>fef
 nunmap <leader>fc
@@ -28,9 +33,10 @@ nunmap <leader>tw
 
 " Files Types
 "autocmd BufRead,BufNewFile *.erb set filetype=eruby.html5
-"autocmd BufRead,BufNewFile *.hbs set filetype=mustache
+autocmd BufRead,BufNewFile *.hbs set filetype=handlebars
 autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
 autocmd BufRead,BufNewFile Assetfile set filetype=ruby
+autocmd BufRead,BufNewFile *.slim set filetype=slim
 
 " Go Tabs
 autocmd Filetype go setlocal ts=4 sw=4 sts=0 noexpandtab
@@ -44,7 +50,7 @@ autocmd BufRead,BufNewFile *.clj nmap <C-c><C-c> <Plug>ClojureEvalFile
 autocmd BufRead,BufNewFile *.clj nmap <C-x><C-x> <Plug>ClojureRunTests
 au BufNewFile,BufRead *.cljs setf clojure
 
-"
+
 " Slimv
 let g:slimv_swank_cmd = '! xterm -e lein swank &'
 let g:paredit_mode = 0
@@ -82,22 +88,22 @@ map <Leader>RT :!ctags --extra=+f --exclude=.git --exclude=log -R * `bundle show
 " coffeetags --vim-conf >> <PATH TO YOUR VIMRC>
 " if you want your tags to include vars/objects do:
 " coffeetags --vim-conf --include-vars
-let g:tagbar_type_coffee = {
-  \ 'kinds' : [
-  \   'f:functions',
-  \   'o:object'
-  \ ],
-  \ 'kind2scope' : {
-  \  'f' : 'object',
-  \   'o' : 'object'
-  \},
-  \ 'sro' : ".",
-  \ 'ctagsbin' : 'coffeetags',
-  \ 'ctagsargs' : '--include-vars ',
-  \}
+"let g:tagbar_type_coffee = {
+  "\ 'kinds' : [
+  "\   'f:functions',
+  "\   'o:object'
+  "\ ],
+  "\ 'kind2scope' : {
+  "\  'f' : 'object',
+  "\   'o' : 'object'
+  "\},
+  "\ 'sro' : ".",
+  "\ 'ctagsbin' : '~/.rbenv/shims/coffeetags',
+  "\ 'ctagsargs' : '--include-vars ',
+  "\}
 
 
-:nnoremap <CR> :nohlsearch<cr>
+map <leader><CR> :nohlsearch<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -175,3 +181,6 @@ function! s:ExecuteInShell(command)
 endfunction
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
+" Switch buffers
+map <C-N> :bnext<cr>
+map <C-M> :bprev<cr>

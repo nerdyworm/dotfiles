@@ -22,6 +22,12 @@ let g:NERDTreeWinSize = 31
 " Terminal colors
 set t_Co=256
 
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['html'] }
+
 " Janus Disable Plugins Section
 call janus#disable_plugin('css-color')
 call janus#disable_plugin('eunuch')
