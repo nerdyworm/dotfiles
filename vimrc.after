@@ -1,6 +1,6 @@
 set background=dark
-color jellybeans
-"color lettuce+
+"color jellybeans++
+color lettuce++
 "color xoria256
 
 "set background=light
