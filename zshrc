@@ -50,5 +50,6 @@ export EDITOR=vim
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-export GOPATH=~/gopath/
-export PATH=${GOPATH//://bin:}/bin:$PATH
+export GOROOT=~/go
+export GOPATH=~/gopath
+export PATH=$GOROOT/bin:$GOPATH/bin:$PATH

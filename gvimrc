@@ -57,3 +57,21 @@ set visualbell t_vb=
 "" silent !osascript ~/bin/refresh.scpt
 "endif
 "endfunction
+
+function! RunTests(filename)
+    " Write the file and run tests for the given filename
+    :w
+    if match(a:filename, '\.feature$') != -1
+        exec ":!script/features " . a:filename
+    elseif match(a:filename, '\.coffee$') != -1
+        exec ":!script/test_js " . a:filename
+    else
+        if filereadable("script/test")
+            exec ":!script/test " . a:filename
+        elseif filereadable("Gemfile")
+            exec ":!bundle exec rspec " . a:filename
+        else
+            exec ":!rspec " . a:filename
+        end
+    end
+endfunction
