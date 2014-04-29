@@ -1,3 +1,5 @@
+set shell=/bin/sh
+
 set background=dark
 color jellybeans++
 "color lettuce++
@@ -46,6 +48,7 @@ autocmd BufRead,BufNewFile *.hbs set filetype=handlebars
 autocmd BufRead,BufNewFile *.jbuilder set filetype=ruby
 autocmd BufRead,BufNewFile Assetfile set filetype=ruby
 autocmd BufRead,BufNewFile *.slim set filetype=slim
+autocmd BufRead,BufNewFile *.cap set filetype=ruby
 
 " Go Tabs
 autocmd Filetype go setlocal ts=4 sw=4 sts=0 noexpandtab
@@ -91,7 +94,9 @@ highlight link htmlLink text
 map ,w :w\|!script/wip<cr>
 
 " CTags and Fun Stuff
-map <Leader>RT :!ctags --extra=+f --exclude=.git --exclude=log -R * `bundle show rails`/../* <cr>
+"map <Leader>RT :!ctags --extra=+f --exclude=.git --exclude=log -R * `bundle show rails`/../* <cr>
+map <Leader>RT :!ctags --extra=+f --exclude=.git --exclude=log <cr>
+
 " Add this type definition to your vimrc
 " or do
 " coffeetags --vim-conf >> <PATH TO YOUR VIMRC>
@@ -159,7 +164,7 @@ function! RunTestFile(...)
     endif
 
     " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_spec.coffee\)$') != -1
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_spec.coffee\|_test.go\)$') != -1
     if in_test_file
         call SetTestFile()
     elseif !exists("t:grb_test_file")
@@ -185,6 +190,8 @@ function! RunTests(filename)
         exec ":!script/features " . a:filename
     elseif match(a:filename, '\.coffee$') != -1
         exec ":!script/test_js " . a:filename
+    elseif match(a:filename, '\.go$') != -1
+        exec ":!script/test " . a:filename
     else
         if filereadable("script/test")
             exec ":!script/test " . a:filename
