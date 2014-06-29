@@ -46,6 +46,9 @@ unsetopt correct_all
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+# nvm
+source $(brew --prefix nvm)/nvm.sh
+
 export EDITOR=vim
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -54,8 +57,11 @@ export GOROOT=~/go
 export GOPATH=~/gopath
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 export PATH=bin:$PATH
+#export PATH=node_modules/.bin:$PATH
 
 export TORQUEBOX_HOME=/Users/benjamin/code/torquebox/torquebox-3.0.0
 export JBOSS_HOME=$TORQUEBOX_HOME/jboss
 export JRUBY_HOME=$TORQUEBOX_HOME/jruby
 export PATH=$PATH:$JRUBY_HOME/bin
+
+export ANDROID_HOME=/usr/local/opt/android-sdk

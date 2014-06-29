@@ -17,8 +17,6 @@ set winheight=999
 let NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 31
 
-"vertical res 31
-
 " Terminal colors
 set t_Co=256
 

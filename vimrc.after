@@ -5,8 +5,16 @@ color jellybeans++
 "color lettuce++
 "color xoria256
 
+let g:Powerline_theme='short'
+let g:Powerline_colorscheme='solarized256_light'
+
+"let g:solarized_termcolors=256
 "set background=light
 "colorscheme solarized
+
+" Prevents Solarized from highlighting tabs in go
+hi SpecialKey ctermbg=NONE
+
 
 " Always split the window below and to the right
 set splitbelow
@@ -229,3 +237,8 @@ autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$', '\.test$']
+
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  'dist\|node_modules\|tmp\|vendor\|\.git$',
+    \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
+    \ }
