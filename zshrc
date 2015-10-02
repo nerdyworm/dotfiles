@@ -35,6 +35,7 @@ plugins=(git bunlder)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.env
+source $HOME/.trice
 
 # Customize to your needs...
 export PATH=~/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/heroku/bin/:/usr/local/share/npm/bin/
@@ -49,19 +50,28 @@ eval "$(rbenv init -)"
 # nvm
 source $(brew --prefix nvm)/nvm.sh
 
+export PATH=$PATH:$HOME/npm/bin
+
 export EDITOR=vim
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-export GOROOT=~/go
-export GOPATH=~/gopath
+export GOROOT=$HOME/go
+export GOPATH=$HOME/gocode
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 export PATH=bin:$PATH
-#export PATH=node_modules/.bin:$PATH
 
-export TORQUEBOX_HOME=/Users/benjamin/code/torquebox/torquebox-3.0.0
-export JBOSS_HOME=$TORQUEBOX_HOME/jboss
-export JRUBY_HOME=$TORQUEBOX_HOME/jruby
-export PATH=$PATH:$JRUBY_HOME/bin
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home
 
 export ANDROID_HOME=/usr/local/opt/android-sdk
+
+# added by travis gem
+[ -f /Users/benjamin/.travis/travis.sh ] && source /Users/benjamin/.travis/travis.sh
+
+# work aliases
+alias ssh-staging-web='ssh -i ~/staging.pem ubuntu@54.171.93.141'
+alias ssh-staging-workflows='ssh -i ~/staging.pem ubuntu@54.77.195.44'
+alias ssh-4='ssh -i ~/staging.pem ubuntu@54.154.180.149'
+alias ssh-staging-new-manage='ssh -i ~/staging.pem ubuntu@54.171.224.186'
+
+unalias gb

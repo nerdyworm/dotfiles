@@ -1,6 +1,9 @@
 " Map jj to Esc
 :imap jj <Esc>
 
+" Allow OS X clipboard
+set clipboard=unnamed
+
 " Map leader to ,
 let mapleader=","
 
@@ -25,6 +28,58 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': ['eruby', 'html'] }
+
+" Disable the window when neocomplete starts auto completing
+set completeopt-=preview
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+   return neocomplete#close_popup() . "\<CR>"
+endfunction
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+
+" Go related mappings
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>b <Plug>(go-build)
+"au FileType go nmap <Leader>t <Plug>(go-test)
+au FileType go nmap gd <Plug>(go-def-tab)
+
+" Go language
+let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
+                           \ 'v:variable;f:function'
+
+" Auto Import Go Packages
+let g:go_fmt_command = "goimports"
+
+let g:netrw_liststyle = 3
+"nnoremap <Leader><Leader> :Tlist<CR><C-W>h<C-W>s:e .<CR><C-W>l:let g:netrw_chgwin=winnr()<CR><C-W>h
+nnoremap <Leader><Leader> :Tagbar<CR><C-W>h<C-W>s:e .<CR><C-W>l:let g:netrw_chgwin=winnr()<CR><C-W>h
+
 
 " Janus Disable Plugins Section
 "call janus#disable_plugin('css-color')
@@ -55,7 +110,7 @@ call janus#disable_plugin('arduino')
 call janus#disable_plugin('elixir')
 call janus#disable_plugin('erlang')
 call janus#disable_plugin('git')
-"call janus#disable_plugin('golang')
+call janus#disable_plugin('golang')
 "call janus#disable_plugin('haml')
 "call janus#disable_plugin('handlebars')
 call janus#disable_plugin('haskell')
@@ -92,7 +147,7 @@ call janus#disable_plugin('narrowregion')
 "call janus#disable_plugin('nerdtree')
 call janus#disable_plugin('repeat')
 call janus#disable_plugin('snipmate')
-"call janus#disable_plugin('supertab')
+call janus#disable_plugin('supertab')
 call janus#disable_plugin('surround')
 "call janus#disable_plugin('syntastic')
 "call janus#disable_plugin('tagbar')

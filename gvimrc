@@ -2,7 +2,7 @@
 " set background=dark
 
 " color jellybeans
-" color moria
+color moria
 " color lucius
 " color solarized
 " color xoria256
@@ -40,7 +40,7 @@ set guioptions=
 
 " Set font
 if has("gui_macvim")
-  set guifont=Anonymous\ Pro:h16
+  set guifont=Monaco:h13
 else
   set guifont=Monaco\ 10
 endif
@@ -75,3 +75,4 @@ function! RunTests(filename)
         end
     end
 endfunction
+

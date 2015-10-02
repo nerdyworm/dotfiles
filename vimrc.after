@@ -1,12 +1,11 @@
 set shell=/bin/sh
 
 set background=dark
-color jellybeans++
+"color jellybeans++
 "color lettuce++
 "color xoria256
-
-let g:Powerline_theme='short'
-let g:Powerline_colorscheme='solarized256_light'
+"color Tomorrow-Night
+color atom-dark-256
 
 "let g:solarized_termcolors=256
 "set background=light
@@ -60,6 +59,9 @@ autocmd BufRead,BufNewFile *.cap set filetype=ruby
 
 " Go Tabs
 autocmd Filetype go setlocal ts=4 sw=4 sts=0 noexpandtab
+
+" Golang stuff
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 
 " Clojure Section
 let vimclojure#WantNailgun = 1
@@ -161,8 +163,8 @@ map <leader><CR> :nohlsearch<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!script/features<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
+"map <leader>c :w\|:!script/features<cr>
+"map <leader>w :w\|:!script/features --profile wip<cr>
 
 function! RunTestFile(...)
     if a:0
@@ -203,6 +205,8 @@ function! RunTests(filename)
     else
         if filereadable("script/test")
             exec ":!script/test " . a:filename
+        elseif filereadable("bin/rspec")
+            exec ":!bin/rspec --color " . a:filename
         elseif filereadable("Gemfile")
             exec ":!bundle exec rspec --color " . a:filename
         else
@@ -242,3 +246,6 @@ let g:ctrlp_custom_ignore = {
     \ 'dir':  'dist\|node_modules\|tmp\|vendor\|\.git$',
     \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
     \ }
+
+
+let g:vim_json_syntax_conceal = 0
