@@ -1,11 +1,18 @@
 set shell=/bin/sh
 
 set background=dark
+color jellybeans
 "color jellybeans++
 "color lettuce++
 "color xoria256
 "color Tomorrow-Night
-color atom-dark-256
+"color atom-dark-256
+"color iceberg
+
+
+"hi link javaScriptTemplateDelim String
+"hi link javaScriptTemplateVar Text
+"hi link javaScriptTemplateString String
 
 "let g:solarized_termcolors=256
 "set background=light
@@ -61,7 +68,7 @@ autocmd BufRead,BufNewFile *.cap set filetype=ruby
 autocmd Filetype go setlocal ts=4 sw=4 sts=0 noexpandtab
 
 " Golang stuff
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_go_checkers = ['errcheck']
 
 " Clojure Section
 let vimclojure#WantNailgun = 1
@@ -167,52 +174,54 @@ map <leader>a :call RunTests('')<cr>
 "map <leader>w :w\|:!script/features --profile wip<cr>
 
 function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
 
-    " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_spec.coffee\|_test.go\)$') != -1
-    if in_test_file
-        call SetTestFile()
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file . command_suffix)
+  " Run the tests for the previously-marked file.
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_spec.coffee\|_test.go\|_test.exs\)$') != -1
+  if in_test_file
+    call SetTestFile()
+  elseif !exists("t:grb_test_file")
+    return
+  end
+  call RunTests(t:grb_test_file . command_suffix)
 endfunction
 
 function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number . " -b")
+  let spec_line_number = line('.')
+  call RunTestFile(":" . spec_line_number . " -b")
 endfunction
 
 function! SetTestFile()
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@%
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@%
 endfunction
 
 function! RunTests(filename)
-    " Write the file and run tests for the given filename
-    :w
-    if match(a:filename, '\.feature$') != -1
-        exec ":!script/features " . a:filename
-    elseif match(a:filename, '\.coffee$') != -1
-        exec ":!script/test_js " . a:filename
-    elseif match(a:filename, '\.go$') != -1
-        exec ":!script/test " . a:filename
+  " Write the file and run tests for the given filename
+  :w
+  if match(a:filename, '\.feature$') != -1
+    exec ":!script/features " . a:filename
+  elseif match(a:filename, '\.coffee$') != -1
+    exec ":!script/test_js " . a:filename
+  elseif match(a:filename, '\.go$') != -1
+    exec ":!script/test " . a:filename
+  else
+    if filereadable("script/test")
+      exec ":!script/test " . a:filename
+    elseif filereadable("bin/rspec")
+      exec ":!bin/rspec --color " . a:filename
+    elseif filereadable("Gemfile")
+      exec ":!bundle exec rspec --color " . a:filename
+    elseif filereadable("mix.exs")
+      exec ":!mix test " . a:filename
     else
-        if filereadable("script/test")
-            exec ":!script/test " . a:filename
-        elseif filereadable("bin/rspec")
-            exec ":!bin/rspec --color " . a:filename
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
-        else
-            exec ":!rspec --color " . a:filename
-        end
+      exec ":!rspec --color " . a:filename
     end
+  end
 endfunction
 
 "function! s:ExecuteInShell(command)
@@ -243,9 +252,31 @@ autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$', '\.test$']
 
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  'dist\|node_modules\|tmp\|vendor\|\.git$',
+    \ 'dir':  'dist\|node_modules\|tmp\|vendor\|\.git$|_build',
     \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
     \ }
 
 
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_fmt_fail_silently = 1
+
+" Fix for vim-go
+map ,rn :call go#rename#Rename()<cr>
+let g:go_autodetect_gopath = 1
+
+" Do not hide quotes in json
+set conceallevel=0
 let g:vim_json_syntax_conceal = 0
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+if filereadable(".jshintrc")
+  let g:syntastic_javascript_checkers = ['jshint']
+else
+  let g:syntastic_javascript_checkers = ['eslint']
+endif
+

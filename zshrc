@@ -56,10 +56,15 @@ export EDITOR=vim
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-export GOROOT=$HOME/go
 export GOPATH=$HOME/gocode
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
 export PATH=bin:$PATH
+export PATH=/Users/benjamin/code/gdcm-2.6.3/gdcmbin/bin:$PATH
+
+# Muse stuff
+export PATH=/Applications/Muse/:$PATH
+export DYLD_FALLBACK_LIBRARY_PATH="$DYLD_FALLBACK_LIBRARY_PATH:/Applications/Muse"
 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home
 
@@ -71,7 +76,7 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 # work aliases
 alias ssh-staging-web='ssh -i ~/staging.pem ubuntu@54.171.93.141'
 alias ssh-staging-workflows='ssh -i ~/staging.pem ubuntu@54.77.195.44'
-alias ssh-4='ssh -i ~/staging.pem ubuntu@54.154.180.149'
+alias ssh-4='ssh -i ~/staging.pem ubuntu@52.51.89.182'
 alias ssh-staging-new-manage='ssh -i ~/staging.pem ubuntu@54.171.224.186'
 
 unalias gb
