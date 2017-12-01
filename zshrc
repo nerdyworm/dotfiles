@@ -38,7 +38,7 @@ source $HOME/.env
 source $HOME/.trice
 
 # Customize to your needs...
-export PATH=~/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/heroku/bin/:/usr/local/share/npm/bin/
+export PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/heroku/bin/:/usr/local/share/npm/bin/
 
 # No auto correct
 unsetopt correct_all
@@ -48,7 +48,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # nvm
-source $(brew --prefix nvm)/nvm.sh
+#source $(brew --prefix nvm)/nvm.sh
 
 export PATH=$PATH:$HOME/npm/bin
 
@@ -56,11 +56,11 @@ export EDITOR=vim
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+export GOROOT=$HOME/go
 export GOPATH=$HOME/gocode
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
-export PATH=/usr/local/go/bin:$PATH
 export PATH=bin:$PATH
-export PATH=/Users/benjamin/code/gdcm-2.6.3/gdcmbin/bin:$PATH
+export PATH="$HOME/.yarn/bin:$PATH"
 
 # Muse stuff
 export PATH=/Applications/Muse/:$PATH
@@ -79,4 +79,8 @@ alias ssh-staging-workflows='ssh -i ~/staging.pem ubuntu@54.77.195.44'
 alias ssh-4='ssh -i ~/staging.pem ubuntu@52.51.89.182'
 alias ssh-staging-new-manage='ssh -i ~/staging.pem ubuntu@54.171.224.186'
 
-unalias gb
+#unalias gb
+unalias grep
+
+# OPAM configuration
+. /Users/benjamin/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

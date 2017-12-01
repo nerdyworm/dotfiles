@@ -21,11 +21,9 @@ color jellybeans
 " Prevents Solarized from highlighting tabs in go
 hi SpecialKey ctermbg=NONE
 
-
 " Always split the window below and to the right
 set splitbelow
-set splitright
-
+set splitright 
 " System wide clipboard
 set clipboard+=unnamed
 
@@ -44,6 +42,13 @@ map <C-L> <C-W>l
 " CtrlP Fuzzy File Finder
 map ,f :CtrlP<cr>
 map ,F :ClearCtrlPCache<cr>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  'dist\|node_modules\|tmp\|vendor\|\.git$|_build',
+    \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
+    \ }
+
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Find all the things
 map ,k :Ack 
@@ -249,12 +254,7 @@ map <C-M> :bprev<cr>
 autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$', '\.test$']
-
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  'dist\|node_modules\|tmp\|vendor\|\.git$|_build',
-    \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
-    \ }
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$','\.class$', '\.o$', '\~$', '\.test$', '_build$', 'deps$', 'node_modules']
 
 
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
@@ -270,13 +270,25 @@ set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
 let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
+let g:syntastic_warning_symbol = '💩'
 
-if filereadable(".jshintrc")
-  let g:syntastic_javascript_checkers = ['jshint']
-else
-  let g:syntastic_javascript_checkers = ['eslint']
-endif
+let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_eslint_exe='/usr/local/bin/eslint'
+"let g:syntastic_debug = 3
+
+let g:elm_format_autosave = 1
+
+" Recomended from elm
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:elm_syntastic_show_warnings = 1
+
+
+" Reason / Ocaml
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ }
+
+let g:mix_format_on_save = 1
 

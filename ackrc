@@ -4,12 +4,14 @@
 --type-add=css=.sass,.less,.scss
 --type-add=shell=.zsh,.bash,.sh
 --type-set=markdown=.markdown,.md
+--type-set=golang=.go
 --ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=doc
 --ignore-dir=public/assets
 --ignore-dir=public/coffeescripts
+--ignore-file=match:.map
 --sort-files
 --color
 --follow
