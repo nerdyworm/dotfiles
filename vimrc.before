@@ -29,6 +29,14 @@ let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': ['eruby', 'html'] }
 
+
+" Remaps enter to select an item from the YouCompleteMe plugin
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+let g:ycm_key_list_select_completion = ['<TAB>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>']
+let g:ycm_key_list_stop_completion = ['<C-y>', '<UP>', '<DOWN>']
+
+
 " store swap files here
 set directory=$HOME/.vim/_tmp/
 
@@ -39,60 +47,60 @@ set directory=$HOME/.vim/_tmp/
 "autocmd! BufWritePost,BufEnter * Neomake
 
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 1
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+"let g:acp_enableAtStartup = 0
+"" Use neocomplete.
+"let g:neocomplete#enable_at_startup = 1
+"" Use smartcase.
+"let g:neocomplete#enable_smart_case = 1
+"" Set minimum syntax keyword length.
+"let g:neocomplete#sources#syntax#min_keyword_length = 1
+"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-let g:neomake_elixir_enabled_makers = ['mycredo']
-function NeomakeCredoErrorType(entry)
-    if a:entry.type ==# 'F'      " Refactoring opportunities
-        let type = 'W'
-    elseif a:entry.type ==# 'D'  " Software design suggestions
-        let type = 'I'
-    elseif a:entry.type ==# 'W'  " Warnings
-        let type = 'W'
-    elseif a:entry.type ==# 'R'  " Readability suggestions
-        let type = 'I'
-    elseif a:entry.type ==# 'C'  " Convention violation
-        let type = 'W'
-    else
-        let type = 'M'           " Everything else is a message
-    endif
-    let a:entry.type = type
-endfunction
-let g:neomake_elixir_mycredo_maker = {
-      \ 'exe': 'mix',
-      \ 'args': ['credo', 'list', '%:p', '--format=oneline'],
-      \ 'errorformat': '[%t] %. %f:%l:%c %m,[%t] %. %f:%l %m',
-      \ 'postprocess': function('NeomakeCredoErrorType')
-      \ }
-
-
+"let g:neomake_elixir_enabled_makers = ['mycredo']
+"function NeomakeCredoErrorType(entry)
+    "if a:entry.type ==# 'F'      " Refactoring opportunities
+        "let type = 'W'
+    "elseif a:entry.type ==# 'D'  " Software design suggestions
+        "let type = 'I'
+    "elseif a:entry.type ==# 'W'  " Warnings
+        "let type = 'W'
+    "elseif a:entry.type ==# 'R'  " Readability suggestions
+        "let type = 'I'
+    "elseif a:entry.type ==# 'C'  " Convention violation
+        "let type = 'W'
+    "else
+        "let type = 'M'           " Everything else is a message
+    "endif
+    "let a:entry.type = type
+"endfunction
+"let g:neomake_elixir_mycredo_maker = {
+      "\ 'exe': 'mix',
+      "\ 'args': ['credo', 'list', '%:p', '--format=oneline'],
+      "\ 'errorformat': '[%t] %. %f:%l:%c %m,[%t] %. %f:%l %m',
+      "\ 'postprocess': function('NeomakeCredoErrorType')
+      "\ }
 
 
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-   return neocomplete#close_popup() . "\<CR>"
-endfunction
 
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+"" Plugin key-mappings.
+"inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+"" Recommended key-mappings.
+"" <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+   "return neocomplete#close_popup() . "\<CR>"
+"endfunction
+
+"" <TAB>: completion.
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+""inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y>  neocomplete#close_popup()
+"inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 
 " Go related mappings
@@ -121,18 +129,10 @@ let g:ycm_semantic_triggers = {
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_show_diagnostics_ui = 1
 
-" Janus Disable Plugins Section
-call janus#disable_plugin('css-color')
-call janus#disable_plugin('eunuch')
-call janus#disable_plugin('matchit')
-call janus#disable_plugin('narrowregion')
-call janus#disable_plugin('vimwiki')
-call janus#disable_plugin('zoomwin')
-call janus#disable_plugin('vroom')
-call janus#disable_plugin('snipmate')
 
-
-" Disable All Janus Plugins
+" NEW LIST OF STUFFS
+call janus#disable_plugin('base16-vim')
+call janus#disable_plugin('darcula')
 call janus#disable_plugin('getafe')
 call janus#disable_plugin('github')
 call janus#disable_plugin('irblack')
@@ -141,46 +141,50 @@ call janus#disable_plugin('molokai')
 call janus#disable_plugin('pyte')
 call janus#disable_plugin('sampler-pack')
 call janus#disable_plugin('solarized')
+call janus#disable_plugin('vim-tomorrow-theme')
 call janus#disable_plugin('vividchalk')
 call janus#disable_plugin('arduino')
 call janus#disable_plugin('clojure')
 call janus#disable_plugin('coffeescript')
-"call janus#disable_plugin('csv')
+call janus#disable_plugin('csv')
 call janus#disable_plugin('cucumber')
-"call janus#disable_plugin('elixir')
+call janus#disable_plugin('elixir')
 call janus#disable_plugin('erlang')
 call janus#disable_plugin('git')
-call janus#disable_plugin('golang')
+call janus#disable_plugin('go')
 call janus#disable_plugin('haml')
-"call janus#disable_plugin('handlebars')
 call janus#disable_plugin('haskell')
-"call janus#disable_plugin('javascript')
-"call janus#disable_plugin('less')
+call janus#disable_plugin('javascript')
+call janus#disable_plugin('json')
+call janus#disable_plugin('less')
+call janus#disable_plugin('liquid')
 "call janus#disable_plugin('markdown')
 call janus#disable_plugin('minitest')
-"call janus#disable_plugin('nodejs')
+call janus#disable_plugin('mustache_handlebars')
+call janus#disable_plugin('nodejs')
 call janus#disable_plugin('puppet')
 "call janus#disable_plugin('rails')
-"call janus#disable_plugin('rspec')
-"call janus#disable_plugin('ruby')
+call janus#disable_plugin('rdoc')
+call janus#disable_plugin('rspec')
+call janus#disable_plugin('ruby')
 call janus#disable_plugin('scala')
 "call janus#disable_plugin('scss')
 call janus#disable_plugin('slim')
 call janus#disable_plugin('textile')
+call janus#disable_plugin('typescript')
 "call janus#disable_plugin('ack')
 call janus#disable_plugin('buffergator')
 call janus#disable_plugin('css-color')
 "call janus#disable_plugin('ctrlp')
 call janus#disable_plugin('dispatch')
 call janus#disable_plugin('easymotion')
-"call janus#disable_plugin('endwise')
+call janus#disable_plugin('endwise')
 call janus#disable_plugin('eunuch')
-"call janus#disable_plugin('fugitive')
+call janus#disable_plugin('fugitive')
 call janus#disable_plugin('gist')
 call janus#disable_plugin('gundo')
 call janus#disable_plugin('indent-object')
 call janus#disable_plugin('kwbd')
-call janus#disable_plugin('matchit')
 call janus#disable_plugin('multiple-cursors')
 call janus#disable_plugin('narrowregion')
 "call janus#disable_plugin('nerdcommenter')
@@ -189,17 +193,16 @@ call janus#disable_plugin('repeat')
 call janus#disable_plugin('snipmate')
 call janus#disable_plugin('supertab')
 call janus#disable_plugin('surround')
-"call janus#disable_plugin('syntastic')
-"call janus#disable_plugin('tagbar')
-"call janus#disable_plugin('tlib')
+call janus#disable_plugin('syntastic')
+call janus#disable_plugin('tagbar')
+call janus#disable_plugin('tlib')
 call janus#disable_plugin('unimpaired')
-"call janus#disable_plugin('vim-addon-mw-utils')
+call janus#disable_plugin('vim-addon-mw-utils')
+call janus#disable_plugin('vim-gitgutter')
 call janus#disable_plugin('vim-snippets')
+"call janus#disable_plugin('vim-trailing-whitespace')
 call janus#disable_plugin('vimwiki')
+call janus#disable_plugin('visualstar')
 call janus#disable_plugin('vroom')
 call janus#disable_plugin('webapi')
-"call janus#disable_plugin('zoomwin')
-
-
-" NEW LIST OF STUFFS
-
+call janus#disable_plugin('zoomwin')
