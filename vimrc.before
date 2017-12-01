@@ -23,12 +23,16 @@ let g:NERDTreeWinSize = 31
 " Terminal colors
 set t_Co=256
 
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['eruby', 'html'] }
-
+"let g:syntastic_error_symbol='✗'
+"let g:syntastic_warning_symbol='⚠'
+"let g:syntastic_mode_map = { 'mode': 'active',
+                           "\ 'active_filetypes': [],
+                           "\ 'passive_filetypes': ['eruby', 'html'] }
+let g:ale_fixers = {'javascript': ['prettier']}
+let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+let g:ale_fix_on_save = 1
 
 " Remaps enter to select an item from the YouCompleteMe plugin
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"

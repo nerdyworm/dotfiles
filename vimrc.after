@@ -2,12 +2,6 @@ set shell=/bin/sh
 
 set background=dark
 color jellybeans
-"color jellybeans++
-"color lettuce++
-"color xoria256
-"color Tomorrow-Night
-"color atom-dark-256
-"color iceberg
 
 
 "hi link javaScriptTemplateDelim String
