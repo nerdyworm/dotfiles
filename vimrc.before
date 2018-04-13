@@ -19,26 +19,40 @@ set winheight=999
 " NerdTree
 let NERDTreeMinimalUI = 1
 let g:NERDTreeWinSize = 31
-
-" Terminal colors
-set t_Co=256
-
 "let g:syntastic_error_symbol='✗'
 "let g:syntastic_warning_symbol='⚠'
 "let g:syntastic_mode_map = { 'mode': 'active',
                            "\ 'active_filetypes': [],
                            "\ 'passive_filetypes': ['eruby', 'html'] }
-let g:ale_fixers = {'javascript': ['prettier']}
+" configure merlin for reasonml/ocaml
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+let g:ale_fixers = {'javascript': ['prettier'], 'elixir': ['mix_format'], 'reason': ['refmt']}
 let g:ale_linters = {'javascript': ['eslint']}
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '💩'
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 
 " Remaps enter to select an item from the YouCompleteMe plugin
 inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-let g:ycm_key_list_select_completion = ['<TAB>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>']
-let g:ycm_key_list_stop_completion = ['<C-y>', '<UP>', '<DOWN>']
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_key_list_select_completion = ['<TAB>', '<C-N>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<C-P>', '<Up>']
+let g:ycm_key_invoke_completion = '<C-F>'
+
+
+
+" Commenter
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
 
 
 " store swap files here
@@ -124,7 +138,7 @@ let g:go_fmt_command = "goimports"
 
 let g:netrw_liststyle = 3
 "nnoremap <Leader><Leader> :Tlist<CR><C-W>h<C-W>s:e .<CR><C-W>l:let g:netrw_chgwin=winnr()<CR><C-W>h
-nnoremap <Leader><Leader> :Tagbar<CR><C-W>h<C-W>s:e .<CR><C-W>l:let g:netrw_chgwin=winnr()<CR><C-W>h
+"nnoremap <Leader><Leader> :Tagbar<CR><C-W>h<C-W>s:e .<CR><C-W>l:let g:netrw_chgwin=winnr()<CR><C-W>h
 
 let g:ycm_semantic_triggers = {
      \ 'elm' : ['.'],

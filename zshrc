@@ -56,9 +56,10 @@ export EDITOR=vim
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-export GOROOT=$HOME/go
+# export GOROOT=$HOME/go
 export GOPATH=$HOME/gocode
-export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+# export GOROOT_BOOTSTRAP=$GOROOT
+export PATH=$GOPATH/bin:$PATH
 export PATH=bin:$PATH
 export PATH="$HOME/.yarn/bin:$PATH"
 
@@ -84,3 +85,4 @@ unalias grep
 
 # OPAM configuration
 . /Users/benjamin/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
